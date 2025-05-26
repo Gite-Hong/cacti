@@ -1,0 +1,12 @@
+# Node.js 의존성 폴더
+node_modules/
+
+# 빌드 폴더
+build/
+dist/
+
+# 환경 파일
+.env
+
+# Git 자체 파일
+.git/
