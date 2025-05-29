@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 import "./WorkCheckPage.css";
-
+import { useCallback, useEffect } from "react";
 function WorkCheckPage() {
     const remarksDescriptions = [
         { symbol: "00", description: "출근 정상 + 퇴근 정상" },
@@ -40,7 +40,7 @@ function WorkCheckPage() {
     if (username) setSelectedEmployee(username);
   }, [username]);
 
-  const fetchWorkSummary = async () => {
+  const fetchWorkSummary = async() => {
     if (!selectedEmployee) return;
     try {
       const res = await axios.get("nozomi.proxy.rlwy.net:24466/api/admin/work-summary", {
