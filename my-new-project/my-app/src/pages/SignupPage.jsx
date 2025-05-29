@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./SignupPage.css";
-
+const API_URL = process.env.REACT_APP_BACKEND_URL; 
 function SignupPage() {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -29,7 +29,7 @@ function SignupPage() {
     }
 
     try {
-      const response = await axios.post("nozomi.proxy.rlwy.net:24466/api/auth/signup", { name, username, password });
+      const response = await axios.post(`${API_URL}/api/auth/signup`, { name, username, password });
       alert(response.data.message);
       navigate("/");
     } catch (error) {

@@ -7,6 +7,7 @@ import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 import "./WorkCheckPage.css";
 import { useCallback, useEffect } from "react";
+const API_URL = process.env.REACT_APP_BACKEND_URL; 
 function WorkCheckPage() {
     const remarksDescriptions = [
         { symbol: "00", description: "출근 정상 + 퇴근 정상" },
@@ -43,7 +44,7 @@ function WorkCheckPage() {
   const fetchWorkSummary = async() => {
     if (!selectedEmployee) return;
     try {
-      const res = await axios.get("nozomi.proxy.rlwy.net:24466/api/admin/work-summary", {
+      const res = await axios.get(`${API_URL}/api/admin/work-summary`, {
         params: {
           username: selectedEmployee,
           year: selectedYear,
@@ -84,7 +85,7 @@ function WorkCheckPage() {
   };
 
   useEffect(() => {
-    axios.get("nozomi.proxy.rlwy.net:24466/api/admin/locations").then((res) => {
+    axios.get(`${API_URL}/api/admin/locations`).then((res) => {
       setLocations(res.data);
     });
   }, []);
@@ -149,7 +150,7 @@ function WorkCheckPage() {
     return `${yyyy}-${mm}-${dd} ${hh}:${mi}:${ss}`;
   };
 
-    await axios.post("nozomi.proxy.rlwy.net:24466/api/admin/delete-work", {
+    await axios.post(`${API_URL}/api/admin/delete-work`, {
       username: record.username,
       clock_in: toMySQLDatetime(record.clock_in),
     });
@@ -338,7 +339,7 @@ function WorkCheckPage() {
             setSelectedLocation(loc);
             if (loc) {
               const res = await axios.get(
-                `nozomi.proxy.rlwy.net:24466/api/admin/users/by-location/${loc}`
+                `${API_URL}/api/admin/users/by-location/${loc}`
               );
               setEmployees(res.data);
               setSelectedEmployee(null);
@@ -425,7 +426,7 @@ function WorkCheckPage() {
                 const handleUpdate = async () => {
                   try {
                     if (record.isNew) {
-                      await axios.post("nozomi.proxy.rlwy.net:24466/api/admin/insert-work", {
+                      await axios.post(`${API_URL}/api/admin/insert-work`, {
                         username: record.username,
                         clock_in: `${selectedDate} ${clockIn}:00`,
                         clock_out: `${selectedDate} ${clockOut}:00`,
@@ -433,7 +434,7 @@ function WorkCheckPage() {
                         memo: "직접 입력 완료",
                       });
                     } else {
-                      await axios.put("nozomi.proxy.rlwy.net:24466/api/admin/update-work", {
+                      await axios.put(`${API_URL}/api/admin/update-work`, {
                         username: record.username,
                         date: dateStr,
                         clock_in: `${dateStr} ${clockIn}:00`,

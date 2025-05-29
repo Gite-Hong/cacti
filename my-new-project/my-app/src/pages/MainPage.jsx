@@ -46,7 +46,7 @@ function MainPage({ user, setUser }) {
   const handleClockIn = async () => {
     try {
       // 1. 사용자 근무시간 정보 가져오기
-      const resUser = await axios.get("nozomi.proxy.rlwy.net:24466/api/admin/users");
+      const resUser = await axios.get(`${API_URL}/api/admin/users`);
       const currentUser = resUser.data.find(u => u.username === user.username);
 
       if (!currentUser) {

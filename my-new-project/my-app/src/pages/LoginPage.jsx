@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LoginPage.css";
 import logo from "../assets/mainlogo.png"; // ⬅️ 로고 이미지 import
-
+const API_URL = process.env.REACT_APP_BACKEND_URL; 
 function LoginPage({ setUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +14,7 @@ function LoginPage({ setUser }) {
   const handleLogin = async () => {
     setErrorMessage("");
     try {
-      const response = await axios.post("nozomi.proxy.rlwy.net:24466/api/auth/login", { username, password });
+      const response = await axios.post(`${API_URL}/api/auth/login`, { username, password });
       const loggedInUser = response.data.user;
       setUser(loggedInUser);
 
