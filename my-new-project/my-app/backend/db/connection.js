@@ -1,5 +1,6 @@
-const mysql = require("mysql2");
 
+require("dotenv").config();
+const mysql = require("mysql2");
 // 환경변수에서 DB 연결 정보 불러오기
 
 const db = mysql.createConnection({
