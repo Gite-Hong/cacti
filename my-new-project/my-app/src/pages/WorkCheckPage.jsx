@@ -91,8 +91,8 @@ function WorkCheckPage() {
 
   useEffect(() => {
     fetchWorkSummary();
-  }, [selectedEmployee, selectedYear, selectedMonth]);
-
+  }, [selectedEmployee, selectedYear, selectedMonth, fetchWorkSummary]);
+  
   const handleTimeChange = (dateStr, field, value) => {
     setTimeEdits((prev) => ({
       ...prev,
