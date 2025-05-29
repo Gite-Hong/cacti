@@ -14,7 +14,7 @@ function AdminPage({ user }) {
   const [selectedLocation, setSelectedLocation] = useState("전체"); // 지점 필터 상태
 
   const navigate = useNavigate();
-
+  const API_URL = process.env.REACT_APP_BACKEND_URL; 
   const weekdays = ["월", "화", "수", "목", "금", "토", "일"];
   const timeOptions = Array.from({ length: 48 }, (_, i) => {
     const hour = String(Math.floor(i / 2)).padStart(2, "0");
@@ -24,8 +24,8 @@ function AdminPage({ user }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const usersRes = await axios.get("http://localhost:5000/api/admin/users");
-      const locationsRes = await axios.get("http://localhost:5000/api/admin/locations");
+      const usersRes = await axios.get("nozomi.proxy.rlwy.net:24466/api/admin/users");
+      const locationsRes = await axios.get("nozomi.proxy.rlwy.net:24466/api/admin/locations");
 
       const processedUsers = usersRes.data.map((user) => ({
         ...user,
@@ -48,20 +48,20 @@ function AdminPage({ user }) {
 
   const addLocation = async () => {
     if (!newLocation) return alert("지점명을 입력하세요.");
-    await axios.post("http://localhost:5000/api/admin/locations", { name: newLocation });
+    await axios.post("nozomi.proxy.rlwy.net:24466/api/admin/locations", { name: newLocation });
     alert("새로운 지점이 추가되었습니다!");
     setNewLocation("");
 
-    const locationRes = await axios.get("http://localhost:5000/api/admin/locations");
+    const locationRes = await axios.get("nozomi.proxy.rlwy.net:24466/api/admin/locations");
     setLocations(locationRes.data);
   };
 
   const deleteLocation = async (id) => {
     if (!window.confirm("정말로 이 지점을 삭제하시겠습니까?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/admin/locations/${id}`);
+      await axios.delete(`nozomi.proxy.rlwy.net:24466/api/admin/locations/${id}`);
       alert("지점이 삭제되었습니다.");
-      const res = await axios.get("http://localhost:5000/api/admin/locations");
+      const res = await axios.get("nozomi.proxy.rlwy.net:24466/api/admin/locations");
       setLocations(res.data);
     } catch (error) {
       alert("지점 삭제 중 오류가 발생했습니다.");
@@ -84,10 +84,10 @@ function AdminPage({ user }) {
         work_end: updatedUser.work_end || null,
       };
 
-      await axios.put(`http://localhost:5000/api/admin/users/${id}`, updatedData);
+      await axios.put(`nozomi.proxy.rlwy.net:24466/api/admin/users/${id}`, updatedData);
       alert("회원 정보가 성공적으로 수정되었습니다!");
 
-      const updatedUsersRes = await axios.get("http://localhost:5000/api/admin/users");
+      const updatedUsersRes = await axios.get("nozomi.proxy.rlwy.net:24466/api/admin/users");
       const processedUsers = updatedUsersRes.data.map((user) => ({
         ...user,
         work_start: user.work_start ? user.work_start.slice(0, 5) : "",
@@ -109,9 +109,9 @@ function AdminPage({ user }) {
   const handleResign = async (id) => {
     if (!window.confirm("정말로 이 회원을 퇴사시키겠습니까?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/admin/users/${id}`);
+      await axios.delete(`nozomi.proxy.rlwy.net:24466/api/admin/users/${id}`);
       alert("회원이 퇴사 처리되었습니다.");
-      const updatedUsers = await axios.get("http://localhost:5000/api/admin/users");
+      const updatedUsers = await axios.get("nozomi.proxy.rlwy.net:24466/api/admin/users");
       setUsers(updatedUsers.data);
       const userMap = {};
       updatedUsers.data.forEach(user => {

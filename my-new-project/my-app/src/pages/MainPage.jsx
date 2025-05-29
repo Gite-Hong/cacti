@@ -8,7 +8,7 @@ function MainPage({ user, setUser }) {
   const [currentTime, setCurrentTime] = useState("");
   const [hasClockedIn, setHasClockedIn] = useState(false); // 출근했는지 여부
   const navigate = useNavigate(); // navigate 추가
-
+  const API_URL = process.env.REACT_APP_BACKEND_URL; 
   // 로그인 상태 확인 (user가 없으면 로그인 페이지로 리다이렉트)
   useEffect(() => {
     if (!user) {
@@ -46,7 +46,7 @@ function MainPage({ user, setUser }) {
   const handleClockIn = async () => {
     try {
       // 1. 사용자 근무시간 정보 가져오기
-      const resUser = await axios.get("http://localhost:5000/api/admin/users");
+      const resUser = await axios.get("nozomi.proxy.rlwy.net:24466/api/admin/users");
       const currentUser = resUser.data.find(u => u.username === user.username);
 
       if (!currentUser) {

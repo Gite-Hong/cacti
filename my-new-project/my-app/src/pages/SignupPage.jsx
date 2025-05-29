@@ -10,7 +10,7 @@ function SignupPage() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-
+  const API_URL = process.env.REACT_APP_BACKEND_URL; 
   const handleSignup = async () => {
     setErrorMessage("");
 
@@ -29,7 +29,7 @@ function SignupPage() {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/signup", { name, username, password });
+      const response = await axios.post("nozomi.proxy.rlwy.net:24466/api/auth/signup", { name, username, password });
       alert(response.data.message);
       navigate("/");
     } catch (error) {

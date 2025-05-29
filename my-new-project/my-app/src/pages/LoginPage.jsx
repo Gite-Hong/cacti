@@ -10,11 +10,11 @@ function LoginPage({ setUser }) {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-
+  const API_URL = process.env.REACT_APP_BACKEND_URL; 
   const handleLogin = async () => {
     setErrorMessage("");
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", { username, password });
+      const response = await axios.post("nozomi.proxy.rlwy.net:24466/api/auth/login", { username, password });
       const loggedInUser = response.data.user;
       setUser(loggedInUser);
 
