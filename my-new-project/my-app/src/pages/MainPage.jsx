@@ -8,7 +8,7 @@ function MainPage({ user, setUser }) {
   const [currentTime, setCurrentTime] = useState("");
   const [hasClockedIn, setHasClockedIn] = useState(false); // 출근했는지 여부
   const navigate = useNavigate(); // navigate 추가
-  const API_URL = process.env.REACT_APP_BACKEND_URL; 
+  //const API_URL = process.env.REACT_APP_BACKEND_URL; 
   // 로그인 상태 확인 (user가 없으면 로그인 페이지로 리다이렉트)
   useEffect(() => {
     if (!user) {

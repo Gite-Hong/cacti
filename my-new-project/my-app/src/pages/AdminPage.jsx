@@ -9,12 +9,12 @@ function AdminPage({ user }) {
   const [locations, setLocations] = useState([]); // 지점 목록
   const [newLocation, setNewLocation] = useState(""); // 새 지점
   const [showUserEdit, setShowUserEdit] = useState(false); // 회원정보 관리 표시
-  const [editStartTime, setEditStartTime] = useState("");
-  const [editEndTime, setEditEndTime] = useState("");
+  //const [editStartTime, setEditStartTime] = useState("");
+  //const [editEndTime, setEditEndTime] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("전체"); // 지점 필터 상태
 
   const navigate = useNavigate();
-  const API_URL = process.env.REACT_APP_BACKEND_URL; 
+  //const API_URL = process.env.REACT_APP_BACKEND_URL; 
   const weekdays = ["월", "화", "수", "목", "금", "토", "일"];
   const timeOptions = Array.from({ length: 48 }, (_, i) => {
     const hour = String(Math.floor(i / 2)).padStart(2, "0");

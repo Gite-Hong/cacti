@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import * as XLSX from "xlsx";
+//import * as XLSX from "xlsx";
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 import "./WorkCheckPage.css";
-const API_URL = process.env.REACT_APP_BACKEND_URL; 
+
 function WorkCheckPage() {
     const remarksDescriptions = [
         { symbol: "00", description: "출근 정상 + 퇴근 정상" },
@@ -20,7 +20,7 @@ function WorkCheckPage() {
       ];
   const navigate = useNavigate();
   const { username } = useParams();
-  const API_URL = process.env.REACT_APP_BACKEND_URL; 
+  //const API_URL = process.env.REACT_APP_BACKEND_URL; 
   const getWeekday = (dateString) => {
       const day = new Date(dateString).getDay();
       return "일월화수목금토".charAt(day);
