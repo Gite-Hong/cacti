@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminPage from "./AdminPage";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+const API_URL = process.env.REACT_APP_BACKEND_URL; 
 
 function MainPage({ user, setUser }) {
   const [currentTime, setCurrentTime] = useState("");

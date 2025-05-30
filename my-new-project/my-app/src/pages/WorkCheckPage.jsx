@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 import "./WorkCheckPage.css";
-import { useCallback, useEffect } from "react";
+
 const API_URL = process.env.REACT_APP_BACKEND_URL; 
 function WorkCheckPage() {
     const remarksDescriptions = [
