@@ -73,8 +73,10 @@ function MainPage({ user, setUser }) {
       }
 
       // 3. 정상 출근 처리
+      const utcNow = new Date().toISOString();  // 반드시 UTC
       await axios.post("/api/work/clock-in", {
         username: user.username,
+        clock_in: utcNow    // ★ 이 값을 같이 보냄!
       });
       alert(`${user.name}님, 출근 기록 완료!`);
       setHasClockedIn(true); // 출근 완료 상태로 전환
@@ -88,8 +90,10 @@ function MainPage({ user, setUser }) {
   // 퇴근
   const handleClockOut = async () => {
     try {
+      const utcNow = new Date().toISOString();
       const res = await axios.post("/api/work/clock-out", {
         username: user.username,
+        clock_out: utcNow
       });
       // ✅ 서버가 퇴근 거부했을 경우
       if (res.data.message === "퇴근 시간이 아닙니다.") {

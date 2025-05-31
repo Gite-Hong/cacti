@@ -72,6 +72,20 @@ function AdminPage({ user }) {
   const handleEdit = async (id) => {
     const updatedUser = editedUsers[id];
     try {
+      const today = new Date();
+      const dateStr = today.toISOString().slice(0, 10);
+  
+      const workStartKST = updatedUser.work_start;
+      const workEndKST = updatedUser.work_end;
+  
+      // "13:00" 등 입력됐을 때만 변환, 아니면 null
+      const kstStartDate = workStartKST 
+        ? new Date(`${dateStr}T${workStartKST}:00+09:00`).toISOString()
+        : null;
+      const kstEndDate = workEndKST 
+        ? new Date(`${dateStr}T${workEndKST}:00+09:00`).toISOString()
+        : null;
+  
       const updatedData = {
         name: updatedUser.name,
         username: updatedUser.username,
